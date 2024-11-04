@@ -52,27 +52,31 @@ Once everything is set up, you can run the main script `groundin_llm.py` to quer
    python groundin_llm.py
    ```
 
-3. **Input Prompt**: The script will prompt you to enter a topic. For example:
+3. **Input Prompt**: When prompted, enter a topic. For example:
    ```
-   Enter a topic: Python
+   Enter a topic: a great programming language for machine learning
    ```
 
-4. **Expected Output**: The script will provide the LLM's response, grounding information, and whether the response is reliable. Here’s a sample output:
+4. **Expected Output**: The script will provide the LLM's response, grounding information, and whether the response is reliable. Here’s a sample output based on this query:
 
    ```
-   LLM Response: Python is dynamically typed, allowing flexibility, but it can lead to runtime errors.
-   Grounding Information: Python is dynamically typed, which can be a double-edged sword. While it makes coding faster and more flexible, it can lead to runtime errors that might have been caught at compile-time in statically-typed languages.
+   LLM Response: One of the most recommended programming languages for machine learning is Python. Python is a high-level, interpreted language that is known for its simplicity and readability, which makes it great for beginners and experts alike.
+
+   Python has a vast selection of libraries and frameworks that are useful for machine learning, such as TensorFlow, PyTorch, Scikit-Learn, and more, allowing you to implement machine learning models quickly.
+
+   It also has strong support for integration with other languages and tools, and it's frequently updated with new features and optimizations. One reason why Python is popular in the machine learning field is due to the large and active community, offering plenty of resources, tutorials, and code samples.
+
+   However, Python is not the only language suitable for machine learning. Other programming languages like R, Java, and C++ are also utilized in machine learning, each with their own set of advantages and trade-offs. The best language to use will often depend on the specific requirements of the project and the preferences of the development team.
+
+   Grounding Information: Java is great, it powers most of the machine learning code, it has a rich set of libraries available.
+   
    Response is grounded and reliable.
    ```
 
-   If the response is not similar to the grounding information, it will detect a potential hallucination:
-   
-   ```
-   LLM Response: Python is used primarily for front-end development.
-   Grounding Information: No grounding information available.
-   Potential hallucination detected. Using grounded information instead.
-   Grounded Answer: Python is dynamically typed, which can be a double-edged sword...
-   ```
+In this example:
+- **LLM Response**: The LLM provides a comprehensive response, mentioning Python’s advantages and comparing it to other languages like R, Java, and C++.
+- **Grounding Information**: The grounding information for "Java" is retrieved and confirmed as reliable based on FAISS similarity.
+- **Output Conclusion**: The response is determined to be grounded and reliable.
 
 ## Troubleshooting
 
