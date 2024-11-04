@@ -42,7 +42,17 @@ def vector_search(query_text, threshold=0.8):
     if I[0][0] != -1 and D[0][0] <= threshold:
         return grounding_data[grounding_keys[I[0][0]]]
     else:
-        return "No grounding information available."
+        return None  # No similar grounding information available
+
+def enhance_response(topic, llm_response):
+    grounding_info = vector_search(llm_response)
+    
+    if grounding_info:
+        # Check if the LLM's response aligns well with grounding information
+        return f"{llm_response}\n\n(Verified Information: {grounding_info})"
+    else:
+        # Add a disclaimer when no grounding data is available
+        return f"{llm_response}\n\n(Disclaimer: This information could not be verified against known data and may contain inaccuracies.)"
 
 # Query the LLM
 def query_llm(prompt):
@@ -59,16 +69,11 @@ def query_llm(prompt):
 def main():
     topic = input("Enter a topic: ")
     llm_response = query_llm(f"What can you tell me about {topic}?")
-    grounding_info = vector_search(llm_response, threshold=0.8)
     
-    print(f"LLM Response: {llm_response}")
-    print(f"Grounding Information: {grounding_info}")
-    
-    if grounding_info != "No grounding information available":
-        print("Response is grounded and reliable.")
-    else:
-        print("Potential hallucination detected. Using grounded information instead.")
-        print(f"Grounded Answer: {grounding_info}")
+    print("LLM Response:", llm_response)
+    enhanced_response = enhance_response(topic, llm_response)
+    print("\nEnhanced Response:")
+    print(enhanced_response)
 
 if __name__ == "__main__":
     main()
